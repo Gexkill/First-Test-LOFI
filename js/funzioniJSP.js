@@ -2,7 +2,6 @@
 	Function that select the payment method of reserve.jsp page
 */
 function SelezionaMetodoPagamento(metodo) {
-	alert(metodo);
 	if (document.getElementById(metodo).style.borderColor == "red") {
 		document.getElementById(metodo).style.borderColor = "#DBDBDB"; 
 		document.getElementById(metodo).style.borderWidth = "1px";
