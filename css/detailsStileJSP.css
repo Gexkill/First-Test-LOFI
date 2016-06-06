@@ -1,0 +1,162 @@
+/*
+style of details.jsp page
+*/
+#menuApp {
+	color: blue;
+	background-color: #FFC125;
+	height: 50px;
+	width: 375px;
+	max-height: 50px;
+	max-width: 375px;
+	position: absolute;
+	top:0px;
+	left:0px;
+}
+
+#t1 {
+	position: absolute;
+	top:-10px;
+	left:5px;
+	font-size: 14px;
+}
+
+#t2 {
+	position: absolute;
+	top:14px;
+	left:5px;
+	font-size: 12px;
+}
+
+#wrapper {
+	/*overflow: scroll;*/
+	background-color: #FFD700;
+	height: 617px;
+	width: 375px;
+	max-height: 617px;
+	max-width: 375px;
+	position: absolute;
+	top:50px;
+	left:0px;
+}
+
+#filtriApp {
+	background-color: #FFD700;
+	font-size: 14px;
+	height: 50px;
+	width: 360px;
+	max-height: 50;
+	max-width: 375px;
+	position: absolute;
+	top: 617px;
+	left:0px;
+}
+
+#imgOfferta {
+	height:30px;
+	width:30px;
+	position: relative;
+	top: 5px;
+	left: 50px;
+
+}
+
+#prezzoOfferta {
+	color:#FF6600;
+	font-size: 16px;
+	font-weight: 900;
+	position: relative;
+	top: 5px;
+	left: -10px;
+}
+#impronta {
+	height:20px;
+	width:20px;
+	position: relative;
+	top: 5px;
+	left: -30px;
+}
+
+#distanzaOfferta {
+	display: inline-block;
+	color:#000099;
+	font-size: 14px;
+	font-weight: 500;
+	position: relative;
+	top: 5px;
+	left: -20px;
+}
+
+#address {
+	color:#FF6600;
+	font-size: 20px;
+	font-weight: 900;
+	position: relative;
+	top: 100px;
+	left: 80px;
+
+}
+
+#mapPosition {
+	position: relative;
+	top: 100px;
+	left: 150px;
+}
+
+#clock {
+	position: relative;
+	top: 150px;
+	left: 100px;
+}
+
+#orarioApertura {
+	color:#FF6600;
+	font-size: 20px;
+	font-weight: 900;
+	position: relative;
+	top: 150px;
+	left: 60px;
+}
+
+#descProdottoOfferta {
+	color:#FF6600;
+	font-size: 20px;
+	font-weight: 900;
+	position: relative;
+	top: 200px;
+	left: 100px;
+}
+
+#logoOk {
+	position: relative;
+	top:200px;
+	left:100px;
+}
+
+#homeLogo {
+	position: relative;
+	background-color: #FFD700;
+
+}
+
+#homeButton {
+	position: relative;
+	background-color: #FFD700;
+	border-style: solid;
+	border-width: 0px;
+	top:-10px;
+}
+
+#bottoneOfferta {
+	position: relative;
+	top:-50px;
+	left: 100px;
+	height: 30px;
+	width: 200px;
+	border-radius: 10px 10px 10px 10px; 
+	background-color: white;
+	border-style: solid;
+	border-color: #FF6600;
+	border-width: 2px;
+	color:#FF6600;
+	font-size: 16px;
+}

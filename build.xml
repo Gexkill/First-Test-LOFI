@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<project name="primaProvaLOFI" default="main" basedir=".">
+
+	<property file="im.properties" />
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar"/>
+	</path>
+
+	<!-- ========================================= -->
+	<!-- Init all java files                       -->
+	<!-- ========================================= -->
+	<target name="init" />
+
+	<!-- ========================================= -->
+	<!-- Clean project from class files            -->
+	<!-- ========================================= -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- ========================================= -->
+	<!-- Compile all java files                    -->
+	<!-- ========================================= -->
+   <target name="compile" depends="init">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" debug="on"/>
+    	 <copy todir="${classes.dir}">
+			<fileset dir="${src.dir}" excludes="**/*.java"/>
+		</copy>
+	</target>
+
+	<!-- ========================================= -->
+	<!-- Create a jarfile                          -->
+	<!-- ========================================= -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+
+		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Main-Class" value="${main-class}"/>				
+				<attribute name="Class-Path" value="${libs.project}" />
+			</manifest>
+        </jar>
+    </target>
+
+	<!-- ========================================= -->
+	<!-- Create a distributuin file (jar file with all jar's)                                                                              -->
+	<!-- ========================================= -->
+	<target name="dist" depends="jar" description="Create binary distribution">
+	  <delete dir="${dist.dir}" />
+
+	  <!-- contains all library dependencies -->
+	  <copy todir="${dist.dir}" file="${jar.dir}/${ant.project.name}.jar" />
+
+	</target>
+
+	<!-- ========================================= -->
+	<!-- First delete all classes than rebuild jar                                                                              -->
+	<!-- ========================================= -->
+	<target name="clean-build" depends="clean,jar"/>
+
+	<!-- ========================================= -->
+	<!-- Make a fresh rebuild and deploy everything jar                                                                              -->
+	<!-- ========================================= -->
+	<target name="main" depends="copyclasses"/>
+
+
+	<!-- ========================================= -->
+	<!-- Deploy jar to WebApplication																		  -->
+	<!-- ========================================= -->
+	<target name="copyclasses" depends="dist">
+			<mkdir dir="${deploy.path}/primaProvaLOFI"/>
+		
+			<copy todir="${deploy.path}/primaProvaLOFI" overwrite="true">
+						<fileset dir="${html.dir}">
+							<include name="**/*" />
+						</fileset>
+						<fileset dir="${jsp.dir}">
+							<include name="**/*" />
+						</fileset>
+			</copy>
+		
+			<copy todir="${deploy.path}/primaProvaLOFI/WEB-INF/lib" overwrite="true">
+				<fileset dir="${dist.dir}">
+					<include name="**/*" />
+				</fileset>
+				<fileset dir="${lib.dir}">
+					<include name="**/*" />
+				</fileset>
+			</copy>
+
+			<copy todir="${deploy.path}/primaProvaLOFI/WEB-INF" overwrite="true">
+				<fileset dir=".">
+					<include name="**/web.xml" />
+				</fileset>
+			</copy>		
+
+	</target>
+</project>

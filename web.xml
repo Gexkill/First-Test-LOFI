@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+      <servlet>
+	      <servlet-name>overview.html</servlet-name>
+    	  	  <servlet-class>Lofi.Overview</servlet-class>
+      </servlet>
+      
+	  <servlet-mapping>
+      	<servlet-name>overview.html</servlet-name>
+		<url-pattern>/overview.html</url-pattern>
+      </servlet-mapping>
+
+      <servlet>
+	      <servlet-name>details.html</servlet-name>
+    	  	  <servlet-class>Lofi.Details</servlet-class>
+      </servlet>
+      
+	  <servlet-mapping>
+      	<servlet-name>details.html</servlet-name>
+		<url-pattern>/details.html</url-pattern>
+      </servlet-mapping>
+
+       <servlet>
+	      <servlet-name>reserve.html</servlet-name>
+    	  	  <servlet-class>Lofi.Reserve</servlet-class>
+      </servlet>
+      
+	  <servlet-mapping>
+      	<servlet-name>reserve.html</servlet-name>
+		<url-pattern>/reserve.html</url-pattern>
+      </servlet-mapping>
+
+       <servlet>
+	      <servlet-name>inviaDatiCompany.html</servlet-name>
+    	  	  <servlet-class>Lofi.InviaDatiCompany</servlet-class>
+      </servlet>
+      
+	  <servlet-mapping>
+      	<servlet-name>inviaDatiCompany.html</servlet-name>
+		<url-pattern>/inviaDatiCompany.html</url-pattern>
+      </servlet-mapping>
+
+</web-app>

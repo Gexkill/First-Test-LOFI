@@ -1,0 +1,423 @@
+--
+-- PostgreSQL database cluster dump
+--
+
+-- Started on 2016-05-21 15:26:37 CEST
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE angelo;
+ALTER ROLE angelo WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS;
+CREATE ROLE postgres;
+ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS;
+
+
+
+
+
+
+--
+-- Database creation
+--
+
+CREATE DATABASE angelo WITH TEMPLATE = template0 OWNER = angelo;
+REVOKE ALL ON DATABASE template1 FROM PUBLIC;
+REVOKE ALL ON DATABASE template1 FROM postgres;
+GRANT ALL ON DATABASE template1 TO postgres;
+GRANT CONNECT ON DATABASE template1 TO PUBLIC;
+
+
+\connect angelo
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.2
+-- Dumped by pg_dump version 9.5.1
+
+-- Started on 2016-05-21 15:26:37 CEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 1 (class 3079 OID 12623)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2362 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- TOC entry 2361 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2016-05-21 15:26:37 CEST
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect postgres
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.2
+-- Dumped by pg_dump version 9.5.1
+
+-- Started on 2016-05-21 15:26:37 CEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 2393 (class 1262 OID 12641)
+-- Dependencies: 2392
+-- Name: postgres; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE postgres IS 'default administrative connection database';
+
+
+--
+-- TOC entry 1 (class 3079 OID 12623)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2396 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 181 (class 1259 OID 16386)
+-- Name: NEGOZIO; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE "NEGOZIO" (
+    "NOMENEGOZIO" character varying(255),
+    "INDIRIZZONEGOZIO" character varying(255),
+    "CITTANEGOZIO" character varying(255),
+    "ORARIOAPERTURA" character varying(255),
+    "PARTITAIVASTRING" character varying(12),
+    "PARTITAIVANUMERIC" numeric(12,0) NOT NULL
+);
+
+
+ALTER TABLE "NEGOZIO" OWNER TO postgres;
+
+--
+-- TOC entry 184 (class 1259 OID 16424)
+-- Name: NUMERATORITRANSAZIONI; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE "NUMERATORITRANSAZIONI" (
+    "PARTITAIVACOMPANY" numeric(12,0) NOT NULL,
+    "NUMERATOREPROGRESSIVO" numeric(15,0) NOT NULL,
+    "COMPANYDESC" character varying(255)
+);
+
+
+ALTER TABLE "NUMERATORITRANSAZIONI" OWNER TO postgres;
+
+--
+-- TOC entry 2397 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: TABLE "NUMERATORITRANSAZIONI"; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TABLE "NUMERATORITRANSAZIONI" IS 'La seguente tabella gestisce i numeratori della transazioni effettuate tramite
+la web application by company
+
+Quindi ogni company avrà i propri numeratori
+';
+
+
+--
+-- TOC entry 182 (class 1259 OID 16396)
+-- Name: OFFERTA; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE "OFFERTA" (
+    "CODPRODOTTO" numeric(8,0) NOT NULL,
+    "PARTITAIVANEGOZIO" numeric(12,0) NOT NULL,
+    "NUMOFFERTEDISP" numeric(4,0),
+    "IMGOFFERTA" character varying(255),
+    "PREZZOOFFERTA" character varying(255),
+    "DISTANZAOFFERTA" character varying(255),
+    "DESCPRODOTTO" character varying(255)
+);
+
+
+ALTER TABLE "OFFERTA" OWNER TO postgres;
+
+--
+-- TOC entry 183 (class 1259 OID 16416)
+-- Name: ORDINE; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE "ORDINE" (
+    "PARTITAIVANEGOZO" numeric(12,0) NOT NULL,
+    "NUMTRANSAZIONE" numeric(15,0) NOT NULL,
+    "NOMECLIENTE" character varying(255),
+    "INDIRIZZOCLIENTE" character varying(255),
+    "METODOPAGAMENTO" character varying(255),
+    "IMPORTO" character varying(255),
+    "CODPRODOTTO" numeric(8,0)
+);
+
+
+ALTER TABLE "ORDINE" OWNER TO postgres;
+
+--
+-- TOC entry 2384 (class 0 OID 16386)
+-- Dependencies: 181
+-- Data for Name: NEGOZIO; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "NEGOZIO" ("NOMENEGOZIO", "INDIRIZZONEGOZIO", "CITTANEGOZIO", "ORARIOAPERTURA", "PARTITAIVASTRING", "PARTITAIVANUMERIC") FROM stdin;
+Autofficina S.r.l.	Via Oberdan 35	20100 Milano (MI)	9 AM - 5 PM	04729123	4729123
+Concessonaria Dodge S.r.l.	Via Manin 28	20100 Milano (MI)	9 AM - 5 PM	08726128	8726128
+Profumeria La Gardenia	Via Dante 1	20100 Milano (MI)	9 AM - 7 PM	09027615	9027615
+Mc Donald's	Via Leonardo da Vinci 178	20100 Milano (MI)	9 AM - 11 PM	01274837	1274837
+Abbigliamento Zara	Via Milani 16	20100 Milano (MI)	9 AM - 7 PM	06278972	6278972
+Leroy Merlin	Viale Sardegna 40	20100 Milano (MI)	9 AM - 7 PM	03627189	3627189
+Centro Commericale Carorello	Viale Monza 10	20100 Milano (MI)	9 AM - 10 PM	02891628	2891628
+Media World	Viale Abruzzi 90	20100 Milano (MI)	9 AM - 8 PM	03627182	3627182
+Apple S.p.a.	Via Gianicolo 71	20100 Milano (MI)	9 AM - 10 PM	02738921	2738921
+Ristorante da Piero	Via Melagnano 63	20100 Milano (MI)	9 AM - 10 PM	02174820	2174820
+\.
+
+
+--
+-- TOC entry 2387 (class 0 OID 16424)
+-- Dependencies: 184
+-- Data for Name: NUMERATORITRANSAZIONI; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "NUMERATORITRANSAZIONI" ("PARTITAIVACOMPANY", "NUMERATOREPROGRESSIVO", "COMPANYDESC") FROM stdin;
+9027615	1	Profumeria La Gardenia
+8726128	1	Concessonaria Dodge S.r.l.
+\.
+
+
+--
+-- TOC entry 2385 (class 0 OID 16396)
+-- Dependencies: 182
+-- Data for Name: OFFERTA; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "OFFERTA" ("CODPRODOTTO", "PARTITAIVANEGOZIO", "NUMOFFERTEDISP", "IMGOFFERTA", "PREZZOOFFERTA", "DISTANZAOFFERTA", "DESCPRODOTTO") FROM stdin;
+98765	4729123	56	http://iconcessionari.it/image/loghi-inpiu/autofficina.png	29.90 &euro;	189 m	945 item left
+13124	8726128	12	http://www.pitstopadvisor.com/f/marche/dodge-[50x50].jpg	209.00 &euro;	78 m	178 item left
+91232	9027615	432	http://www.agataprofumerie.it/thumbnail/get/50_50/paco-rabanne-one-million-cologne-eau-de-parfum-3181.jpg	59.99 &euro;	827 m	129 item left
+32812	1274837	43	http://coolbuddy.com/icon/logos/ico_mcdonald.gif	15.65 &euro;	327 m	987 item left
+67231	6278972	134	http://www.gazzettadellavoro.com/wp-content/uploads/2014/08/zara-logo-50x50.jpg	49.99 &euro;	100 m	78 item left
+98172	3627189	324	http://www.aperture-supermercati.it/immagini/immsmall/leroymerlin.gif	19.07 &euro;	750 m	12 item left
+67381	2891628	67	http://www.lelencodeinegozi.it/assets/mall/centro-carosello-carugate/centro-carosello-carugate.jpeg	57.90 &euro;	980 m	93 item left
+72832	3627182	53	http://www.correttainformazione.it/wp-content/uploads/2016/02/volantino-mediaworld-1-50x50.png	515.00 &euro;	523 m	129 item left
+42681	2738921	82	http://images.apple.com/v/iphone/d/images/buystrip_retail_icon.png	629.00 &euro;	45 m	87 item left
+56123	2174820	38	http://www.hoteldelavillesalsomaggiore.it/images/servizi/img_ristorante.gif	45.00 &euro;	672 m	98 item left
+\.
+
+
+--
+-- TOC entry 2386 (class 0 OID 16416)
+-- Dependencies: 183
+-- Data for Name: ORDINE; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "ORDINE" ("PARTITAIVANEGOZO", "NUMTRANSAZIONE", "NOMECLIENTE", "INDIRIZZOCLIENTE", "METODOPAGAMENTO", "IMPORTO", "CODPRODOTTO") FROM stdin;
+9027615	1	67	ert	mastercard	59.99 	91232
+8726128	1	5678	6789	paypal	"209.00 "	13124
+\.
+
+
+--
+-- TOC entry 2261 (class 2606 OID 16393)
+-- Name: PARTITAIVANUMERIC; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "NEGOZIO"
+    ADD CONSTRAINT "PARTITAIVANUMERIC" PRIMARY KEY ("PARTITAIVANUMERIC");
+
+
+--
+-- TOC entry 2263 (class 2606 OID 16395)
+-- Name: PARTITAIVASTRING; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "NEGOZIO"
+    ADD CONSTRAINT "PARTITAIVASTRING" UNIQUE ("PARTITAIVASTRING");
+
+
+--
+-- TOC entry 2269 (class 2606 OID 16430)
+-- Name: Primaky key Company; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "NUMERATORITRANSAZIONI"
+    ADD CONSTRAINT "Primaky key Company" PRIMARY KEY ("PARTITAIVACOMPANY");
+
+
+--
+-- TOC entry 2265 (class 2606 OID 16403)
+-- Name: Primary Key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "OFFERTA"
+    ADD CONSTRAINT "Primary Key" PRIMARY KEY ("CODPRODOTTO", "PARTITAIVANEGOZIO");
+
+
+--
+-- TOC entry 2267 (class 2606 OID 16432)
+-- Name: Primary Key Ordine; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "ORDINE"
+    ADD CONSTRAINT "Primary Key Ordine" PRIMARY KEY ("PARTITAIVANEGOZO", "NUMTRANSAZIONE");
+
+
+--
+-- TOC entry 2395 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2016-05-21 15:26:37 CEST
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect template1
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.2
+-- Dumped by pg_dump version 9.5.1
+
+-- Started on 2016-05-21 15:26:37 CEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 2360 (class 1262 OID 1)
+-- Dependencies: 2359
+-- Name: template1; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE template1 IS 'default template for new databases';
+
+
+--
+-- TOC entry 1 (class 3079 OID 12623)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2363 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- TOC entry 2362 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2016-05-21 15:26:37 CEST
+
+--
+-- PostgreSQL database dump complete
+--
+
+-- Completed on 2016-05-21 15:26:37 CEST
+
+--
+-- PostgreSQL database cluster dump complete
+--
+
