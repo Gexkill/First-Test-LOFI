@@ -1,12 +1,151 @@
 #XML
 
 ```xml
-<!ELEMENT WCC (Edition+)>
-<!ELEMENT Edition (Date, Location, Competitor+)>
-<!ELEMENT Competitor (Name, Cocktail+)>
-<!ELEMENT Cocktail (Name, Category, Ingredient+, 
-	OriginalityPoints, AppearancePoints, 
-	TastePoints, OverallScore)>
+<?xml version="1.0"?>
+<!DOCTYPE WCC[ 
+  <!ELEMENT WCC (Edition+)>
+  <!ELEMENT Edition (Date, Location, Competitor+)>
+  <!ELEMENT Competitor (Name, Cocktail+)>
+  <!ELEMENT Cocktail (Name, Category, Ingredient+, 
+    OriginalityPoints, AppearancePoints, 
+    TastePoints, OverallScore)>
+]>
+<WCC>
+  <edition>
+    <date>01/01/2000</date>
+    <location></location>
+    <competitor>
+      <Name>Ginetto</Name>
+      <Cocktail>
+        <Name>Cocktail1</Name>
+        <Category>Casino</Category>
+        <Ingredient>Sambuca</Ingredient>
+        <Ingredient>Gin</Ingredient>
+        <Ingredient>Prosecco</Ingredient>
+        <OriginalityPoints></OriginalityPoints>
+        <AppearancePoints>50</AppearancePoints>
+        <TastePoints></TastePoints>
+        <OverallScore>51</OverallScore>
+      </Cocktail>
+    </competitor>
+    <competitor>
+      <Name>Mario</Name>
+      <Cocktail>
+        <Name>Cocktail2</Name>
+        <Category>Clover Club</Category>
+        <Ingredient>Gin</Ingredient>
+        <Ingredient>Sambuca</Ingredient>
+        <Ingredient>Acqua</Ingredient>
+        <OriginalityPoints></OriginalityPoints>
+        <AppearancePoints>9</AppearancePoints>
+        <TastePoints></TastePoints>
+        <OverallScore>52</OverallScore>
+      </Cocktail>
+    </competitor>
+  </edition>
+  <edition>
+    <date>01/01/2001</date>
+    <location></location>
+    <competitor>
+      <Name>Pinuzzo</Name>
+      <Cocktail>
+        <Name>Cocktail3</Name>
+        <Category>Angel Face</Category>
+        <Ingredient>Aperol</Ingredient>
+        <Ingredient>Gin</Ingredient>
+        <Ingredient>Champagne</Ingredient>
+        <OriginalityPoints></OriginalityPoints>
+        <AppearancePoints>90</AppearancePoints>
+        <TastePoints></TastePoints>
+        <OverallScore>53</OverallScore>
+      </Cocktail>
+    </competitor>
+    <competitor>
+      <Name>Pinuzzo</Name>
+      <Cocktail>
+        <Name>Cocktail4</Name>
+        <Category>Americano</Category>
+        <Ingredient>Jack Daniels</Ingredient>
+        <Ingredient>Coca Cola</Ingredient>
+        <Ingredient>Gin</Ingredient>
+        <OriginalityPoints></OriginalityPoints>
+        <AppearancePoints>14</AppearancePoints>
+        <TastePoints></TastePoints>
+        <OverallScore>54</OverallScore>
+      </Cocktail>
+    </competitor>
+  </edition>
+  <edition>
+    <date>01/01/2002</date>
+    <location></location>
+    <competitor></competitor>
+    <competitor>
+      <Name>Marcolino</Name>
+      <Cocktail>
+        <Name>Cocktail5</Name>
+        <Category>Americano</Category>
+        <Ingredient>Jaggermeister</Ingredient>
+        <Ingredient>Glen Grant</Ingredient>
+        <Ingredient>Assenzio</Ingredient>
+        <OriginalityPoints></OriginalityPoints>
+        <AppearancePoints>18</AppearancePoints>
+        <TastePoints></TastePoints>
+        <OverallScore>55</OverallScore>
+      </Cocktail>
+    </competitor>
+  </edition>
+  <edition>
+    <date>01/01/2003</date>
+    <location></location>
+    <competitor></competitor>
+    <competitor>
+      <Name>Ginetto</Name>
+      <Cocktail>
+        <Name>Cocktail6</Name>
+        <Category>Daiquiri</Category>
+        <Ingredient>Red Bull</Ingredient>
+        <Ingredient>Jaggermeister</Ingredient>
+        <Ingredient>Gin</Ingredient>
+        <OriginalityPoints></OriginalityPoints>
+        <AppearancePoints>50</AppearancePoints>
+        <TastePoints></TastePoints>
+        <OverallScore>56</OverallScore>
+      </Cocktail>
+    </competitor>
+  </edition>
+  <edition>
+    <date>01/01/2004</date>
+    <location></location>
+    <competitor>
+      <Name>Pinuzzo</Name>
+      <Cocktail>
+        <Name>Cocktail7</Name>
+        <Category>Angel Face</Category>
+        <Ingredient>Gin</Ingredient>
+        <Ingredient>Arancia</Ingredient>
+        <Ingredient>Aperol</Ingredient>
+        <OriginalityPoints></OriginalityPoints>
+        <AppearancePoints>43</AppearancePoints>
+        <TastePoints></TastePoints>
+        <OverallScore>57</OverallScore>
+      </Cocktail>
+    </competitor>
+    <competitor>
+      <Name>Giuseppe</Name>
+      <Cocktail>
+        <Name>Cocktail8</Name>
+        <Category>Daiquiri</Category>
+        <Ingredient>Gin</Ingredient>
+        <Ingredient>Sambuca</Ingredient>
+        <Ingredient>Prosecco</Ingredient>
+        <OriginalityPoints></OriginalityPoints>
+        <AppearancePoints>43</AppearancePoints>
+        <TastePoints></TastePoints>
+        <OverallScore>58</OverallScore>
+      </Cocktail>
+    </competitor>
+  </edition>
+</WCC>
 ```
 
 The DTD above (in which unspecified elements only contain PCData) describes the results of the World Cocktail Championship, organized by the International Bartender Association, where competitors present originally conceived cocktails, and a professional jury grades their creations w.r.t. their originality, appearance, and taste. Extract in XQuery:
