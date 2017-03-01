@@ -1,13 +1,13 @@
 #XML
 
-~~~xml
+```xml
 <!ELEMENT WCC (Edition+)>
 <!ELEMENT Edition (Date, Location, Competitor+)>
 <!ELEMENT Competitor (Name, Cocktail+)>
 <!ELEMENT Cocktail (Name, Category, Ingredient+, 
 	OriginalityPoints, AppearancePoints, 
 	TastePoints, OverallScore)>
-~~~
+```
 
 The DTD above (in which unspecified elements only contain PCData) describes the results of the World Cocktail Championship, organized by the International Bartender Association, where competitors present originally conceived cocktails, and a professional jury grades their creations w.r.t. their originality, appearance, and taste. Extract in XQuery:
 
