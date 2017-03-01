@@ -1,6 +1,6 @@
 #XML
 
-~~~ xml
+~~~xml
 <!ELEMENT WCC (Edition+)>
 <!ELEMENT Edition (Date, Location, Competitor+)>
 <!ELEMENT Competitor (Name, Cocktail+)>
